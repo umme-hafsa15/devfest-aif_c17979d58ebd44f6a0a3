@@ -1,0 +1,17 @@
+{
+  "building": "Tie Break Test",
+  "nodes": [
+    {"id":"S","label":"Start","type":"room","x":80,"y":200},
+    {"id":"A","label":"A","type":"junction","x":300,"y":120},
+    {"id":"B","label":"B","type":"junction","x":300,"y":280},
+    {"id":"E1","label":"Exit 1","type":"exit","x":600,"y":120},
+    {"id":"E2","label":"Exit 2","type":"exit","x":600,"y":280}
+  ],
+  "edges": [
+    {"id":"sa","from":"S","to":"A","cost":2},
+    {"id":"sb","from":"S","to":"B","cost":2},
+    {"id":"ae1","from":"A","to":"E1","cost":3},
+    {"id":"be2","from":"B","to":"E2","cost":3}
+  ],
+  "initial_state":{"blocked_nodes":[],"blocked_edges":[],"closed_exits":[]}
+}

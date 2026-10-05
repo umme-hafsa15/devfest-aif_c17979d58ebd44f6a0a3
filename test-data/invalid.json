@@ -1,0 +1,6 @@
+{
+  "building": "Broken Example",
+  "nodes": [{"id":"A","label":"A","type":"room","x":0,"y":0}],
+  "edges": [{"id":"x","from":"A","to":"A","cost":0}],
+  "initial_state":{"blocked_nodes":[],"blocked_edges":[],"closed_exits":[]}
+}

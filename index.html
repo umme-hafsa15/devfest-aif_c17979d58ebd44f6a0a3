@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1220" />
+  <title>Smart Escape | Interactive Evacuation Route Simulator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow" data-i18n="practice">Practice Challenge</p>
+        <h1>Smart Escape</h1>
+        <p class="subtitle" data-i18n="subtitle">Interactive Evacuation Route Simulator</p>
+      </div>
+      <div class="top-actions">
+        <button id="langBtn" class="btn btn-ghost" type="button" aria-label="Change language">বাংলা</button>
+        <button id="resetBtn" class="btn btn-secondary" type="button" data-i18n="reset">Reset</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel map-panel">
+        <div class="section-head">
+          <div>
+            <h2 id="buildingName">Building map</h2>
+            <p id="datasetMeta" class="muted" data-i18n="loadHint">Import a building.json file or use the sample dataset.</p>
+          </div>
+          <div class="file-actions">
+            <input id="fileInput" type="file" accept="application/json,.json" hidden />
+            <button id="importBtn" class="btn btn-primary" type="button" data-i18n="importJson">Import JSON</button>
+            <button id="sampleBtn" class="btn btn-ghost" type="button" data-i18n="loadSample">Load sample</button>
+          </div>
+        </div>
+
+        <div id="dropZone" class="drop-zone" tabindex="0">
+          <svg id="map" viewBox="0 0 1000 650" role="img" aria-label="Interactive evacuation map"></svg>
+          <div id="emptyState" class="empty-state">
+            <strong data-i18n="emptyTitle">No building loaded</strong>
+            <span data-i18n="emptyText">Import building.json to begin.</span>
+          </div>
+        </div>
+
+        <div class="legend" aria-label="Map legend">
+          <span><i class="dot room"></i><b data-i18n="room">Room</b></span>
+          <span><i class="dot junction"></i><b data-i18n="junction">Junction</b></span>
+          <span><i class="dot exit"></i><b data-i18n="exit">Exit</b></span>
+          <span><i class="line route"></i><b data-i18n="route">Best route</b></span>
+          <span><i class="line blocked"></i><b data-i18n="blocked">Blocked</b></span>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <section class="panel status-panel">
+          <p class="eyebrow" data-i18n="liveResult">Live result</p>
+          <div id="statusCard" class="status-card neutral" aria-live="polite">
+            <h3 id="statusTitle" data-i18n="chooseStart">Choose a starting location</h3>
+            <p id="statusText" data-i18n="chooseStartHelp">Select an available room or junction on the map or from the list.</p>
+          </div>
+          <div id="routeDetails" class="route-details hidden">
+            <div><span data-i18n="path">Path</span><strong id="routePath">—</strong></div>
+            <div><span data-i18n="destination">Exit</span><strong id="routeExit">—</strong></div>
+            <div><span data-i18n="totalCost">Total cost</span><strong id="routeCost">—</strong></div>
+          </div>
+        </section>
+
+        <section class="panel controls-panel">
+          <div class="section-head compact">
+            <div>
+              <p class="eyebrow" data-i18n="startLocation">Start location</p>
+              <h2 data-i18n="selectStart">Select start</h2>
+            </div>
+          </div>
+          <select id="startSelect" class="select" aria-label="Start location">
+            <option value="" data-i18n="selectPlaceholder">Select a room or junction</option>
+          </select>
+          <p class="helper" data-i18n="mapClickHelp">Tip: clicking an available room or junction also selects it.</p>
+        </section>
+
+        <section class="panel hazards-panel">
+          <div class="section-head compact">
+            <div>
+              <p class="eyebrow" data-i18n="hazards">Simulated hazards</p>
+              <h2 data-i18n="changeConditions">Change conditions</h2>
+            </div>
+          </div>
+          <div class="tabs" role="tablist">
+            <button class="tab active" type="button" data-tab="nodes" data-i18n="locations">Locations</button>
+            <button class="tab" type="button" data-tab="edges" data-i18n="corridors">Corridors</button>
+          </div>
+          <div id="nodeControls" class="hazard-list"></div>
+          <div id="edgeControls" class="hazard-list hidden"></div>
+        </section>
+
+        <section id="validationPanel" class="panel validation-panel hidden">
+          <p class="eyebrow" data-i18n="validation">Validation</p>
+          <h2 data-i18n="invalidDataset">Invalid dataset</h2>
+          <ul id="validationList"></ul>
+        </section>
+      </aside>
+    </main>
+
+    <footer>
+      <span data-i18n="disclaimer">Educational simulation only — not a certified real-world evacuation planning tool.</span>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
